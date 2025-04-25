@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import "../styles/Style.css";
 import { motion } from "framer-motion";
+import lineUp from '../assets/images/lineUp.png';
+import fallen from '../assets/images/fallen.png';
+import timeFuria from '../assets/images/timeFuria.png';
+import kingsLeague from '../assets/images/kingsLeague.png';
+import furiaAdidas1 from '../assets/images/furiaAdidas1.png';
+import furiaAdidas2 from '../assets/images/furiaAdidas2.png';
+
 
 const Quiz = ({ onFinalizar }) => {
   const [respostas, setRespostas] = useState({});
@@ -12,7 +19,7 @@ const Quiz = ({ onFinalizar }) => {
     {
       id: 'jogo',
       texto: 'Qual lineup da FURIA você mais acompanha?',
-      opcoes: ['CS:GO', 'League of Legends', 'Valorant', 'Rainbow Six Siege']
+      opcoes: ['CS2', 'League of Legends', 'Valorant', 'Rainbow Six Siege']
     },
     {
       id: 'redesSociais',
@@ -42,10 +49,20 @@ const Quiz = ({ onFinalizar }) => {
     opcoes: ['Preço alto', 'Não curti os produtos', 'Não sou fã da Adidas', 'Outro motivo']
   };
 
+  const imagensPorPergunta = {
+    jogo: lineUp,
+    redesSociais: fallen,
+    frequencia: timeFuria,
+    kingsleague: kingsLeague,
+    furiaAdidas: furiaAdidas1,
+    motivoNaoAdidas: furiaAdidas2
+  };
+  
+
   const todasPerguntas = [...perguntas, ...perguntasExtras];
   const pergunta = todasPerguntas[perguntaAtual];
+  const imagemAtual = imagensPorPergunta[pergunta?.id] || "../assets/Images/default.png";
 
-  // Garante que vá para a pergunta extra quando for adicionada
   useEffect(() => {
     if (
       perguntasExtras.length === 1 &&
@@ -72,33 +89,42 @@ const Quiz = ({ onFinalizar }) => {
 
   return (
     <motion.div
-    className="quiz-container"
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -30 }}
-    transition={{ duration: 0.5 }}
-  >
-    <div className="quiz-container">
-      <h2 className='titulo-quiz'>{pergunta.texto}</h2>
-      <div className="opcoes">
-        {pergunta.opcoes.map((opcao, index) => (
-          <button
-            key={index}
-            onClick={() => setRespostaSelecionada(opcao)}
-            className={`quiz-button ${respostaSelecionada === opcao ? 'selecionada' : ''}`}
-          >
-            {opcao}
-          </button>
-        ))}
+      className="quiz-container"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="quiz-container">
+        <h2 className="titulo-quiz">{pergunta.texto}</h2>
+
+        <img
+  src={imagensPorPergunta[pergunta.id]}
+  alt="Imagem da pergunta"
+  className="imagem-pergunta"
+/>
+
+
+        <div className="opcoes">
+          {pergunta.opcoes.map((opcao, index) => (
+            <button
+              key={index}
+              onClick={() => setRespostaSelecionada(opcao)}
+              className={`quiz-button ${respostaSelecionada === opcao ? 'selecionada' : ''}`}
+            >
+              {opcao}
+            </button>
+          ))}
+        </div>
+
+        <button
+          className="confirmar-button"
+          onClick={confirmarResposta}
+          disabled={!respostaSelecionada}
+        >
+          Confirmar
+        </button>
       </div>
-      <button
-        className="confirmar-button"
-        onClick={confirmarResposta}
-        disabled={!respostaSelecionada}
-      >
-        Confirmar
-      </button>
-    </div>
     </motion.div>
   );
 };
