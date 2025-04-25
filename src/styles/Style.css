@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@700&display=swap');
+
+body {
+  font-family: "Oxygen", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  margin: 0;
+  background-color: #2c2c2c;
+  color: #fff;
+}
+
+.app-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.bem-vindo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.logo-furia {
+  margin-left: 2.5%;
+  margin-bottom: 20px;
+}
+
+.texto-container {
+  text-align: center;
+  max-width: 600px;
+}
+
+.start-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  background-color: #fff;
+  color: #000;
+  border: 3px solid #000000;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  
+}
+
+.start-button:hover {
+  background-color: #000000;
+  color: #f0f0f0;
+  border: 3px solid #f0f0f0;
+}
+
+
+.quiz-container {
+
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  padding: 2rem;
+}
+
+.titulo-quiz{
+  margin-top: 12vh;
+  font-size: 40px;
+}
+
+.opcoes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  width: 100%;
+}
+
+.quiz-button {
+  width: 100%;
+  max-width: 600px; /* Limita largura para monitores muito grandes */
+  min-width: 280px;  /* Garante boa largura em telas pequenas */
+  min-height: 60px;
+  padding: 16px 24px;
+  font-size: 18px;
+  text-align: center;
+  background-color: #ffffff;
+  border: 2px solid #333;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quiz-button:hover {
+  background-color: #ffffffa9;
+}
+
+.quiz-button.selecionada {
+  background-color: #000000;
+  color: #817d4e;
+  border-bottom: white 5px solid;
+  font-weight: bold;
+}
+
+.confirmar-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  border: 3px solid #fff;
+  border-radius: 3px;
+}
+.confirmar-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.confirmar-button:hover {
+  background-color: #f0f0f0;
+  color: #000000;
+  border: 3px solid #000000;
+}
+
+.resultados-container {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+}
