@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import "../styles/Style.css";
-import simboloFuria from '../assets/images/Furia-Esports.png';
+import simboloFuria from '../assets/images/furiaLogo.png';
 
 const BemVindo = ({ onStart }) => {
   return (
