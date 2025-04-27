@@ -24,5 +24,4 @@ git clone https://github.com/SEU_USUARIO/Projeto-FURIA.git
 cd Projeto-FURIA
 npm install
 npm install framer-motion
-npm install recharts
 npm start
