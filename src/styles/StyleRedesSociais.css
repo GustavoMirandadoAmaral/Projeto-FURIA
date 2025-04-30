@@ -1,0 +1,99 @@
+.vincular_container {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.icone_cadastro {
+    width: 60px;
+    height: 60px;
+    padding: 2px;
+}
+
+.titulo_vincular {
+    color: #000000;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.vincular_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vincular_button {
+    width: 100%;
+    padding: 12px 20px 12px 62px;
+    font-weight: bold;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #000000;
+    position: relative;
+    
+}
+
+.vincular_button:hover {
+    background-color: #f0f0f0;
+    color: #000000;
+    border: 2px solid #000000;
+}
+
+.vincular_privacy_text {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #777;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.vincular_text {
+    flex: 1;
+    text-align: center;
+}
+
+.vincular_icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.vincular_button:hover .vincular_icon {
+    filter: invert(1);
+  }
+
+.confirmar_vincular_button {
+    width: 100%;
+    padding: 12px 20px 12px 20px;
+    font-weight: bold;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #000000;
+    position: relative;
+    
+}
+
+.confirmar_vincular_button:hover {
+    background-color: #f0f0f0;
+    color: #000000;
+    border: 2px solid #000000;
+}

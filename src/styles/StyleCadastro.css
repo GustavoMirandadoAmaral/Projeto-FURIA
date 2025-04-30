@@ -1,102 +1,88 @@
 .cadastro_container {
-    max-width: 500px;
-    margin: 50px auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .cadastro_form {
-    display: flex;
-    flex-direction: column;
-  }
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
 
-  .titulo_cadastro{
-    color: #000000;
-  }
-  
-  .cadastro_form label {
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #000000;
-  }
-  
-  .cadastro_form input[type="text"],
-  .cadastro_form input[type="checkbox"],
-  .cadastro_form textarea {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    outline: none;
-    transition: border-color 0.3s;
-  }
-  
-  .cadastro_form input[type="text"]:focus,
-  .cadastro_form textarea:focus {
-    border-color: #0e76a8; /* Azul leve quando focado */
-  }
-  
-  .cadastro_form textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-  
-  .checkbox_container {
-    margin-top: 20px;
-    display: flex;
-    align-items: center; /* Centraliza na linha */
-    gap: 10px; /* Espaçamento entre o quadrado e o texto */
-  }
-  
-  .checkbox_container input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    margin: 0;
-  }
-  
-  .checkbox_container label {
-    margin: 0;
-    font-weight: bold;
-    color: #333;
-    line-height: 1.4;
-  }  
-  
-  .privacy_text {
-    margin-top: 20px;
-    font-size: 12px;
-    color: #777;
-    line-height: 1.4;
-    text-align: center;
-  }
-  
-  /* Classe para inputs com erro */
-  .error {
-    border: 2px solid red;
-  }
+.cadastro_form {
+  display: flex;
+  flex-direction: column;
+}
 
-  .confirmar_button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-weight: bold;
-    background-color: #000000;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: 0.2s;
-    border: 3px solid #fff;
-    border-radius: 3px;
-  }
-  .confirmar_button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  .confirmar_button:hover {
-    background-color: #f0f0f0;
-    color: #000000;
-    border: 3px solid #000000;
-  }
+.titulo_cadastro {
+  color: #000000;
+}
+
+/* Label dos inputs */
+.cadastro_label {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #000000;
+}
+
+/* Inputs de texto */
+.cadastro_input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.cadastro_input:focus {
+  border-color: #0e76a8; /* Azul leve quando focado */
+}
+
+/* Textarea */
+.cadastro_textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.cadastro_textarea:focus {
+  border-color: #0e76a8;
+}
+
+/* Checkbox container */
+.cadastro_checkbox_container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Checkbox quadradinho */
+.cadastro_checkbox {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+
+/* Label do checkbox */
+.cadastro_label_checkbox {
+  margin: 0;
+  font-weight: bold;
+  color: #333;
+  line-height: 1.4;
+}
+
+/* Texto de privacidade */
+.cadastro_privacy_text {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #777;
+  line-height: 1.4;
+  text-align: center;
+}
   

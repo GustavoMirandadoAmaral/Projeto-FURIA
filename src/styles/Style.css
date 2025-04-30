@@ -11,7 +11,33 @@ body {
 
 .app-container {
   text-align: center;
-  padding: 2rem;
+}
+
+.header_cadastro {
+  display: flex;
+  justify-content: space-between; /* máxima separação */
+  align-items: center;
+}
+
+.voltar_button {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 70px;
+  background-color: transparent;
+  border: 0px;
+  margin-top: -60px;
+  margin-left: -30px;
+}
+
+.voltar_button:hover {
+  filter: invert(1);
+}
+
+.icone_topo_tela {
+  padding-top: 10px;
+  padding-right: 208px;
+  width: 70px;
+  height: auto;
 }
 
 .bem-vindo-container {
@@ -113,7 +139,7 @@ body {
   font-weight: bold;
 }
 
-.confirmar-button {
+.confirmar_button {
   margin-top: 20px;
   padding: 10px 20px;
   font-weight: bold;
@@ -125,12 +151,13 @@ body {
   border: 3px solid #fff;
   border-radius: 3px;
 }
-.confirmar-button:disabled {
+
+.confirmar_button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.confirmar-button:hover {
+.confirmar_button:hover {
   background-color: #f0f0f0;
   color: #000000;
   border: 3px solid #000000;

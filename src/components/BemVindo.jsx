@@ -1,9 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import simboloFuria from '../assets/images/furiaLogoNome.png';
 import "../styles/Style.css";
-import simboloFuria from '../assets/images/furiaLogo.png';
 
-const BemVindo = ({ proximaEtapa }) => {
+const BemVindo = () => {
+  const navigate = useNavigate();
+
   return (
     <motion.div
       className="bem-vindo-container"
@@ -16,7 +19,7 @@ const BemVindo = ({ proximaEtapa }) => {
       <h1>
         Bem-vindo(a) à <span className="furia-text">pesquisa de campo da FURIA</span>!
       </h1>
-      <button onClick={proximaEtapa} className="start-button">
+      <button onClick={() => navigate("/cadastro")} className="confirmar_button">
         Começar
       </button>
     </motion.div>
