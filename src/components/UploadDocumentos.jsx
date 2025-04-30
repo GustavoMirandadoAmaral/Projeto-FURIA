@@ -62,7 +62,7 @@ const UploadDocumentos = () => {
       exit={{ opacity: 0, x: -100 }}
       transition={{ duration: 0.5 }}
     >
-      <Header />
+      <Header rotaAnterior= "/cadastro" />
       <h2 className="titulo_upload">Upload de Documentos</h2>
       <form className="upload_form" onSubmit={handleSubmit}>
         <label htmlFor="tipoDocumento" className="upload_label">Tipo de Documento</label>

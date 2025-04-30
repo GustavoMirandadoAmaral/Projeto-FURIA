@@ -4,14 +4,14 @@ import FuriaEsportsLogo from "../assets/images/furiaEsportsLogo.png";
 import Voltar from "../assets/images/voltar.png";
 import "../styles/Style.css";
 
-const Header = () => {
+const Header = ({ rotaAnterior }) => {
   const navigate = useNavigate();
 
   const voltar = () => {
-    if (document.referrer && window.history.length > 1) {
-      navigate(-1);
+    if (rotaAnterior) {
+      navigate(rotaAnterior);
     } else {
-      navigate("/cadastro"); // Substitua pela rota inicial do seu fluxo
+      navigate("/cadastro");
     }
   };
 
@@ -24,5 +24,6 @@ const Header = () => {
     </div>
   );
 };
+
 
 export default Header;

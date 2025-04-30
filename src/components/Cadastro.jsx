@@ -40,7 +40,7 @@ function Cadastro() {
       exit={{ opacity: 0, x: -100 }}
       transition={{ duration: 0.5 }}
     >
-      <Header />
+      <Header rotaAnterior="/" />
       <h2 className="titulo_cadastro">Dados pessoais</h2>
       
       <form className="cadastro_form" onSubmit={handleSubmit}>

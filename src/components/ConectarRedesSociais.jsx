@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom'; // para navegar programaticamente
+import { useForm } from '../context/FormContext'; // importa o contexto corretamente
 import '../styles/StyleRedesSociais.css';
 import Header from './Header';
 import Instagram from "../assets/images/instagramLogo.png";
 import X from "../assets/images/xLogo.png";
 import Facebook from "../assets/images/facebookLogo.png";
 
-const VincularRedesSociais = ({ formulario, atualizarFormulario, proximaEtapa }) => {
+const VincularRedesSociais = () => {
+  const { atualizarFormulario } = useForm(); // ✔ pega do contexto
+  const navigate = useNavigate(); // ✔ para ir para a próxima etapa
+
   const [redesVinculadas, setRedesVinculadas] = useState({
     instagram: false,
     x: false,
@@ -30,8 +35,8 @@ const VincularRedesSociais = ({ formulario, atualizarFormulario, proximaEtapa })
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    atualizarFormulario({ ...formulario, redesSociais: redesVinculadas });
-    proximaEtapa();
+    atualizarFormulario({ redesSociais: redesVinculadas });
+    navigate('/final'); // ✔ redireciona para a tela final
   };
 
   return (
@@ -42,11 +47,10 @@ const VincularRedesSociais = ({ formulario, atualizarFormulario, proximaEtapa })
       exit={{ opacity: 0, x: -100 }}
       transition={{ duration: 0.5 }}
     >
-      <Header />
+      <Header rotaAnterior= "/documentos" />
       <h2 className="titulo_vincular">Vincular Redes Sociais</h2>
 
       <form className="vincular_form" onSubmit={handleSubmit}>
-
         <button
           type="button"
           className={`vincular_button ${redesVinculadas.instagram ? 'vinculada' : ''}`}
