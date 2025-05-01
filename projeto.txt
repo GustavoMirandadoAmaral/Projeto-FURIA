@@ -1,0 +1,31 @@
+know-your-fan-backend/
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── app/
+│   ├── _init_.py
+│   ├── main.py               # instancia FastAPI + inclui routers
+│   ├── config.py             # leitura de .env (pydantic settings)
+│   ├── models.py             # SQLModel: User, Interest, Document, SocialProfile
+│   ├── db.py                 # engine, sessão e create_db()
+│   ├── routers/
+│   │   ├── users.py
+│   │   ├── interests.py
+│   │   ├── documents.py
+│   │   └── socials.py
+│   ├── services/
+│   │   ├── ocr_service.py    # wrapper pytesseract
+│   │   └── ai_service.py     # wrapper OpenAI
+│   └── security.py           # JWT setup
+├── migrations/               # gerado por alembic (se usar)
+├── tests/
+│   ├── conftest.py
+│   ├── test_users.py
+│   ├── test_documents.py
+│   └── ...
+├── .env.example
+├── pyproject.toml            # Poetry
+├── alembic.ini               # se usar alembic
+├── Dockerfile
+├── docker-compose.yml
+└── README.md
