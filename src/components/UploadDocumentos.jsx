@@ -47,11 +47,35 @@ const UploadDocumentos = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Atualiza o contexto antes do envio
     const dadosDocumentos = { tipoDocumento, frente, verso };
     atualizarFormulario({ ...formulario, documentos: dadosDocumentos });
-    navigate("/redes");
+
+    // Prepara os dados para o envio ao backend
+    const formData = new FormData();
+    formData.append("tipoDocumento", tipoDocumento);
+    formData.append("frente", frente);
+    if (verso) formData.append("verso", verso);
+
+    try {
+      const response = await fetch("http://localhost:8000/upload-documento/", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Falha ao enviar documento para o servidor");
+      }
+
+      const resultado = await response.json();
+      console.log("Documentos enviados com sucesso:", resultado);
+      navigate("/redes");
+    } catch (error) {
+      console.error("Erro ao enviar documentos:", error);
+    }
   };
 
   return (
@@ -62,7 +86,7 @@ const UploadDocumentos = () => {
       exit={{ opacity: 0, x: -100 }}
       transition={{ duration: 0.5 }}
     >
-      <Header rotaAnterior= "/cadastro" />
+      <Header rotaAnterior="/cadastro" />
       <h2 className="titulo_upload">Upload de Documentos</h2>
       <form className="upload_form" onSubmit={handleSubmit}>
         <label htmlFor="tipoDocumento" className="upload_label">Tipo de Documento</label>
