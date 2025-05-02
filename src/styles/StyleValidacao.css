@@ -1,0 +1,33 @@
+.validacao_container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.spinner {
+  margin: 20px auto;
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #f7931e;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.validacao_sucesso, .validacao_erro {
+  margin-top: 2rem;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #f7931e;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+}

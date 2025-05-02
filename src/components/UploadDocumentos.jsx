@@ -15,6 +15,8 @@ const UploadDocumentos = () => {
   const [verso, setVerso] = useState(formulario.documentos?.verso || null);
   const [frenteNome, setFrenteNome] = useState(formulario.documentos?.frente?.name || 'Nenhum arquivo selecionado');
   const [versoNome, setVersoNome] = useState(formulario.documentos?.verso?.name || 'Nenhum arquivo selecionado');
+  const [carregando, setCarregando] = useState(false);
+  const [erro, setErro] = useState(null);
 
   const documentos = [
     { valor: 'identidade', label: 'Identidade (RG)' },
@@ -49,34 +51,39 @@ const UploadDocumentos = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Atualiza o contexto antes do envio
+    setCarregando(true);
+    setErro(null);
+  
     const dadosDocumentos = { tipoDocumento, frente, verso };
     atualizarFormulario({ ...formulario, documentos: dadosDocumentos });
-
-    // Prepara os dados para o envio ao backend
+  
     const formData = new FormData();
     formData.append("tipoDocumento", tipoDocumento);
     formData.append("frente", frente);
-    if (verso) formData.append("verso", verso);
-
+    if (verso) {
+      formData.append("verso", verso);
+    }
+  
     try {
-      const response = await fetch("http://localhost:8000/upload-documento/", {
+      const response = await fetch("http://localhost:8000/upload/", {
         method: "POST",
         body: formData,
       });
-
+  
       if (!response.ok) {
         throw new Error("Falha ao enviar documento para o servidor");
       }
-
+  
       const resultado = await response.json();
       console.log("Documentos enviados com sucesso:", resultado);
       navigate("/redes");
     } catch (error) {
       console.error("Erro ao enviar documentos:", error);
+      setErro("Não foi possível enviar os documentos. Tente novamente.");
+    } finally {
+      setCarregando(false);
     }
-  };
+  };  
 
   return (
     <motion.div
@@ -107,7 +114,6 @@ const UploadDocumentos = () => {
 
         {tipoDocumento && (
           <>
-            {/* Frente */}
             <label htmlFor="frenteInput" className="upload_label">
               {tipoDocumento === 'identidade' ? 'Frente do Documento' : 'Foto do Documento'}
             </label>
@@ -127,7 +133,6 @@ const UploadDocumentos = () => {
               </div>
             </div>
 
-            {/* Verso (apenas para identidade) */}
             {tipoDocumento === 'identidade' && (
               <>
                 <label htmlFor="versoInput" className="upload_label">Verso do Documento</label>
@@ -154,10 +159,12 @@ const UploadDocumentos = () => {
         <button
           type="submit"
           className="upload_button"
-          disabled={!tipoDocumento || !frente || (tipoDocumento === 'identidade' && !verso)}
+          disabled={!tipoDocumento || !frente || (tipoDocumento === 'identidade' && !verso) || carregando}
         >
-          Salvar e Continuar
+          {carregando ? 'Enviando...' : 'Salvar e Continuar'}
         </button>
+
+        {erro && <p className="upload_erro_text">{erro}</p>}
 
         <p className="upload_privacy_text">
           As imagens serão utilizadas apenas para fins de verificação no projeto FURIA.

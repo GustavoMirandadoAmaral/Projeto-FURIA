@@ -7,6 +7,8 @@ import Header from './Header';
 import Instagram from "../assets/images/instagramLogo.png";
 import X from "../assets/images/xLogo.png";
 import Facebook from "../assets/images/facebookLogo.png";
+import Twitch from "../assets/images/twitchLogo.png";
+import Youtube from "../assets/images/youtubeLogo.png";
 
 const VincularRedesSociais = () => {
   const { atualizarFormulario } = useForm(); // ✔ pega do contexto
@@ -26,6 +28,10 @@ const VincularRedesSociais = () => {
       novaJanela = window.open('https://twitter.com/i/flow/login', '_blank');
     } else if (rede === 'facebook') {
       novaJanela = window.open('https://www.facebook.com/login/', '_blank');
+    } else if (rede === 'twitch') {
+      novaJanela = window.open('https://www.twitch.tv/login', '_blank');
+    } else if (rede === 'youtube') {
+      novaJanela = window.open('https://www.youtube.com/account_advanced?hl=pt-br', '_blank');
     }
 
     if (novaJanela) {
@@ -76,6 +82,24 @@ const VincularRedesSociais = () => {
         >
           <span className="vincular_text">Vincular Facebook</span>
           <img src={Facebook} alt="Facebook" className="vincular_icon" />
+        </button>
+
+        <button
+          type="button"
+          className={`vincular_button ${redesVinculadas.youtube ? 'vinculada' : ''}`}
+          onClick={() => handleVincular('youtube')}
+        >
+          <span className="vincular_text">Vincular Youtube</span>
+          <img src={Youtube} alt="Youtube" className="vincular_icon" />
+        </button>
+
+        <button
+          type="button"
+          className={`vincular_button ${redesVinculadas.twitch ? 'vinculada' : ''}`}
+          onClick={() => handleVincular('twitch')}
+        >
+          <span className="vincular_text">Vincular Twitch</span>
+          <img src={Twitch} alt="Twitch" className="vincular_icon" />
         </button>
 
         <button type="submit" className="confirmar_vincular_button" style={{ marginTop: '30px' }}>

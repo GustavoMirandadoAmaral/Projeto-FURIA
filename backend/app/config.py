@@ -1,4 +1,4 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings  # Alterado para importar de pydantic-settings
 
 class Settings(BaseSettings):
     app_name: str = "Know Your Fan"

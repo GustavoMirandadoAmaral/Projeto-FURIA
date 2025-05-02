@@ -14,7 +14,7 @@ const TelaFinal = ({ linksRecomendados = [] }) => {
       exit={{ opacity: 0, x: -100 }}
       transition={{ duration: 0.5 }}
     >
-      <Header rotaAnterior="redes"/>
+      <Header rotaAnterior="/redes"/>
       <h2 className="final_title">Cadastro Finalizado!</h2>
       <p className="final_text">
         Com base no seu perfil, estamos gerando recomendações de plataformas de e-sports para você.
