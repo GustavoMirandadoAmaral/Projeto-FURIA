@@ -1,23 +1,29 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# FastAPI / Uploads
+/uploads/
+.env
+test.db
 
-# testing
-/coverage
-
-# production
-/build
-
-# misc
-.DS_Store
+# Node
+node_modules/
+dist/
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Logs
+*.log
+
+# VS Code
+.vscode/
+
+# React build
+/build/
+public/build/
+*.lock

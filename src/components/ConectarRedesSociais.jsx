@@ -9,6 +9,10 @@ import X from "../assets/images/xLogo.png";
 import Facebook from "../assets/images/facebookLogo.png";
 import Twitch from "../assets/images/twitchLogo.png";
 import Youtube from "../assets/images/youtubeLogo.png";
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom'; // para ler query params
+
+
 
 const VincularRedesSociais = () => {
   const { atualizarFormulario } = useForm(); // ✔ pega do contexto
@@ -18,6 +22,8 @@ const VincularRedesSociais = () => {
     instagram: false,
     x: false,
     facebook: false,
+    youtube: false,
+    twitch: false,
   });
 
   const handleVincular = (rede) => {
@@ -29,7 +35,7 @@ const VincularRedesSociais = () => {
     } else if (rede === 'facebook') {
       novaJanela = window.open('https://www.facebook.com/login/', '_blank');
     } else if (rede === 'twitch') {
-      novaJanela = window.open('https://www.twitch.tv/login', '_blank');
+      novaJanela = window.open('http://localhost:8000/twitch/login', '_blank');
     } else if (rede === 'youtube') {
       novaJanela = window.open('https://www.youtube.com/account_advanced?hl=pt-br', '_blank');
     }
@@ -45,6 +51,18 @@ const VincularRedesSociais = () => {
     navigate('/final'); // ✔ redireciona para a tela final
   };
 
+  const location = useLocation();
+
+useEffect(() => {
+  const params = new URLSearchParams(location.search);
+  if (params.get("twitch") === "success") {
+    setRedesVinculadas((prev) => ({ ...prev, twitch: true }));
+    // limpa a query string da URL
+    window.history.replaceState({}, document.title, location.pathname);
+  }
+}, [location]);
+
+
   return (
     <motion.div
       className="vincular_container"
@@ -53,7 +71,7 @@ const VincularRedesSociais = () => {
       exit={{ opacity: 0, x: -100 }}
       transition={{ duration: 0.5 }}
     >
-      <Header rotaAnterior= "/documentos" />
+      <Header rotaAnterior="/documentos" />
       <h2 className="titulo_vincular">Vincular Redes Sociais</h2>
 
       <form className="vincular_form" onSubmit={handleSubmit}>
@@ -92,7 +110,7 @@ const VincularRedesSociais = () => {
           <span className="vincular_text">Vincular Youtube</span>
           <img src={Youtube} alt="Youtube" className="vincular_icon" />
         </button>
-
+        
         <button
           type="button"
           className={`vincular_button ${redesVinculadas.twitch ? 'vinculada' : ''}`}
@@ -102,7 +120,10 @@ const VincularRedesSociais = () => {
           <img src={Twitch} alt="Twitch" className="vincular_icon" />
         </button>
 
-        <button type="submit" className="confirmar_vincular_button" style={{ marginTop: '30px' }}>
+        <button
+          type="submit"
+          className="confirmar_vincular_button"
+        >
           <span className="vincular_text">Salvar e Continuar</span>
         </button>
 

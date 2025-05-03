@@ -22,7 +22,6 @@ const UploadDocumentos = () => {
     { valor: 'identidade', label: 'Identidade (RG)' },
     { valor: 'cnh', label: 'CNH (Carteira de Motorista)' },
     { valor: 'passaporte', label: 'Passaporte' },
-    { valor: 'outro', label: 'Outro Documento' },
   ];
 
   const handleDocumentoChange = (e) => {
