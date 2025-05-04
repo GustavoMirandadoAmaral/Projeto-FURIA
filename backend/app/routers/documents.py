@@ -1,62 +1,31 @@
-from fastapi import APIRouter, UploadFile, File, Form, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi import APIRouter, File, UploadFile
+from azure_validator import validar_documento_azure
 import os
+import shutil
+from uuid import uuid4
 
-from app.azure_validator import validar_documento_azure
+router = APIRouter()
 
-router = APIRouter(prefix="/upload", tags=["Documentos"])
+UPLOAD_FOLDER = "temp_uploads"
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-@router.post("/")
-async def upload_documentos(
-    tipoDocumento: str = Form(...),
-    frente: UploadFile = File(...),
-    verso: UploadFile = File(None)
-):
+@router.post("/upload/")
+async def upload_documento(verso: UploadFile = File(...)):
     try:
-        os.makedirs("uploads", exist_ok=True)
+        # Salva o arquivo do verso com nome único
+        ext = verso.filename.split('.')[-1]
+        caminho_verso = os.path.join(UPLOAD_FOLDER, f"{uuid4()}.{ext}")
+        with open(caminho_verso, "wb") as buffer:
+            shutil.copyfileobj(verso.file, buffer)
 
-        # --- Salvar frente ---
-        caminho_frente = f"uploads/{frente.filename}"
-        frente_content = await frente.read()
-        with open(caminho_frente, "wb") as f:
-            f.write(frente_content)
+        # Valida com Azure
+        resultado_verso = validar_documento_azure(caminho_verso)
 
-        # --- Validar frente ---
-        resultado_frente = validar_documento_azure(caminho_arquivo=caminho_frente)
+        # Apaga o arquivo temporário
+        os.remove(caminho_verso)
 
-        # --- Verificação imediata ---
-        if "erro" in resultado_frente:
-            os.remove(caminho_frente)
-            raise HTTPException(status_code=400, detail=resultado_frente["erro"])
+        # Retorna resultado direto
+        return resultado_verso
 
-        # --- Salvar verso (se houver) ---
-        resultado_verso = None
-        caminho_verso = None
-
-        if verso:
-            caminho_verso = f"uploads/{verso.filename}"
-            verso_content = await verso.read()
-            with open(caminho_verso, "wb") as f:
-                f.write(verso_content)
-
-            try:
-                resultado_verso = validar_documento_azure(caminho_arquivo=caminho_verso)
-            except Exception as e:
-                resultado_verso = {"erro": f"Erro ao processar o verso: {str(e)}"}
-
-        # --- Limpeza dos arquivos ---
-        os.remove(caminho_frente)
-        if caminho_verso and os.path.exists(caminho_verso):
-            os.remove(caminho_verso)
-
-        return JSONResponse(content={
-            "mensagem": "Documentos enviados com sucesso",
-            "tipoDocumento": tipoDocumento,
-            "resultado_frente": resultado_frente,
-            "resultado_verso": resultado_verso
-        }, status_code=200)
-
-    except HTTPException as he:
-        raise he
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erro ao processar os documentos: {str(e)}")
+        return {"erro": f"Erro ao processar o upload: {str(e)}"}

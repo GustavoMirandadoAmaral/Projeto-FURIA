@@ -36,8 +36,8 @@ const ValidacaoIA = () => {
         if (data.resultado_frente?.valido) {
           setStatus("sucesso");
           setTimeout(() => {
-            navigate("/redes");
-          }, 4000);
+            navigate("/redes"); // Redireciona para a tela de ConectarRedesSociais
+          }, 4000); // Espera 4 segundos antes de redirecionar
         } else {
           setStatus("erro");
         }
@@ -62,7 +62,7 @@ const ValidacaoIA = () => {
       {status === "sucesso" && (
         <div className="validacao_sucesso">
           <h2>Documentos validados com sucesso!</h2>
-          <p>Redirecionando para o próximo passo...</p>
+          <p>Você será redirecionado para a próxima etapa em breve...</p>
         </div>
       )}
       {status === "erro" && (

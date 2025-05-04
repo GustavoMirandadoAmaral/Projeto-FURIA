@@ -1,3 +1,4 @@
+/* Container do upload de documentos */
 .upload_container {
     max-width: 500px;
     margin: 30px auto;
@@ -7,34 +8,59 @@
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Ícone de cadastro */
 .icone_cadastro {
     width: 60px;
     height: 60px;  
     padding: 2px;
-  }
-  
-.titulo_upload{
-    color: #000000;
 }
 
+/* Títulos e textos */
+.titulo_upload {
+    color: #000000;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.identificacao {
+    color: #000000;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.aviso {
+    color: #000000ab;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Container dos inputs de upload */
 .upload_input_container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 30px;
+    padding: 15px; /* Reduzido o padding para um ajuste mais compacto */
     border: 1px solid #000000;
     border-radius: 8px;
     background-color: #def0f1;
     margin-bottom: 15px;
+    width: 100%;
+    max-width: 460px; /* Ajuste o tamanho máximo para garantir que não ultrapasse o quadrado maior */
 }
 
+
+/* Ícone do documento */
 .documento_icone {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     margin-bottom: 10px;
 }
 
+/* Inputs do formulário */
 .upload_input_real {
     font-size: 16px;
     color: #000000;
@@ -42,29 +68,33 @@
     border: none;
 }
 
+/* Formulário de upload */
 .upload_form {
     display: flex;
     flex-direction: column;
 }
 
+/* Labels de inputs */
 .upload_label {
-    margin-top: 15px;
-    margin-bottom: 5px;
     font-weight: bold;
     color: #000000;
+    font-size: 16px;
 }
 
-.upload_select{
+/* Estilo do select de upload */
+.upload_select {
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 16px;
     outline: none;
     transition: border-color 0.3s;
+    width: 100%;
 }
 
+/* Estilo do input de texto */
 .upload_input {
-    padding: 30px;
+    padding: 15px;
     border: 1px solid #000000;
     border-radius: 8px;
     font-size: 16px;
@@ -72,17 +102,15 @@
     transition: border-color 0.3s;
     background-color: #b7d1d37a;
     color: #000000;
+    width: 100%;
 }
 
-.upload_select:focus,
-.upload_input:focus {
-    border-color: #0e76a8; /* Azul leve quando focado */
-}
-
+/* Estilo do input de arquivo (oculto) */
 .hidden_file_input {
     display: none;
 }
 
+/* Botão customizado para escolha de arquivo */
 .custom_file_button {
     margin-top: 10px;
     padding: 10px 20px;
@@ -94,27 +122,36 @@
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     font-size: 16px;
+    text-align: center;
 }
 
+/* Efeito hover do botão de arquivo */
 .custom_file_button:hover {
     background-color: #f0f0f0;
     color: #000000;
     border: 3px solid #000000;
 }
 
+/* Container de arquivos selecionados */
 .upload_file_section {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 10px;
     margin-top: 10px;
+    width: 100%;
 }
 
+/* Nome do arquivo carregado */
 .upload_file_name {
     font-size: 14px;
     color: #333;
-    word-break: break-all;
+    word-break: break-word;
+    text-align: center;
+    margin-top: 10px;
 }
 
+/* Botão para enviar o formulário */
 .upload_button {
     margin-top: 20px;
     padding: 10px 20px;
@@ -126,19 +163,23 @@
     transition: 0.2s;
     border: 3px solid #fff;
     border-radius: 3px;
+    width: 100%;
 }
 
+/* Estado desabilitado do botão */
 .upload_button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
 
+/* Efeito hover no botão de envio */
 .upload_button:hover {
     background-color: #f0f0f0;
     color: #000000;
     border: 3px solid #000000;
 }
 
+/* Texto de privacidade */
 .upload_privacy_text {
     margin-top: 20px;
     font-size: 12px;
@@ -147,8 +188,45 @@
     text-align: center;
 }
 
-.upload_erro_text{
-    color: #000000;
+/* Texto de erro */
+.upload_erro_text {
+    color: #ff0000;
     text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 15px;
 }
 
+/* Adicionando responsividade para telas pequenas */
+@media (max-width: 600px) {
+    .upload_container {
+        padding: 15px;
+        margin: 15px;
+    }
+
+    .titulo_upload {
+        font-size: 20px;
+    }
+
+    .upload_input_container {
+        padding: 10px;
+    }
+
+    .upload_label {
+        font-size: 14px;
+    }
+
+    .upload_button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .custom_file_button {
+        font-size: 14px;
+    }
+
+    .upload_file_name {
+        font-size: 12px;
+    }
+}
+    

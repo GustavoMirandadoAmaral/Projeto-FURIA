@@ -26,7 +26,7 @@ const VincularRedesSociais = () => {
     twitch: false,
   });
 
-  const handleVincular = (rede) => {
+  const handleVincular = async (rede) => {
     let novaJanela;
     if (rede === 'instagram') {
       novaJanela = window.open('https://www.instagram.com/accounts/login/', '_blank');
@@ -39,7 +39,7 @@ const VincularRedesSociais = () => {
     } else if (rede === 'youtube') {
       novaJanela = window.open('https://www.youtube.com/account_advanced?hl=pt-br', '_blank');
     }
-
+  
     if (novaJanela) {
       setRedesVinculadas((prev) => ({ ...prev, [rede]: true }));
     }
