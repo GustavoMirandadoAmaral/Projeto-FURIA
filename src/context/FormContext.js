@@ -1,10 +1,7 @@
-// src/context/FormContext.js
 import React, { createContext, useState, useContext, useReducer } from "react";
 
-// Ação para atualizar o estado do formulário
 const ATUALIZAR_FORMULARIO = "ATUALIZAR_FORMULARIO";
 
-// Função de redução para gerenciar o estado
 const formularioReducer = (state, action) => {
   switch (action.type) {
     case ATUALIZAR_FORMULARIO:
@@ -17,7 +14,6 @@ const formularioReducer = (state, action) => {
 const FormContext = createContext();
 
 export const FormProvider = ({ children }) => {
-  // Usando useReducer para maior controle sobre o estado
   const [formulario, dispatch] = useReducer(formularioReducer, {
     nome: "",
     cpf: "",

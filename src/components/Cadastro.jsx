@@ -16,14 +16,24 @@ function Cadastro() {
     interesses: formulario.interesses || '',
     atividades: formulario.atividades || '',
     aceitarOfertas: formulario.aceitarOfertas || false,
+    jogosFuria: formulario.jogosFuria || [],
   });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
+    if (type === 'checkbox') {
+      setFormData((prevData) => ({
+        ...prevData,
+        jogosFuria: checked
+          ? [...prevData.jogosFuria, value]
+          : prevData.jogosFuria.filter((jogo) => jogo !== value),
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: type === 'checkbox' ? checked : value,
+      }));
+    }
   };
 
   const handleSubmit = (e) => {
@@ -80,17 +90,6 @@ function Cadastro() {
           required
         />
 
-        <label htmlFor="interesses" className="cadastro_label">Interesses</label>
-        <input
-          type="text"
-          id="interesses"
-          name="interesses"
-          className="cadastro_input"
-          placeholder="Seus interesses"
-          value={formData.interesses}
-          onChange={handleChange}
-        />
-
         <label htmlFor="atividades" className="cadastro_label">Atividades, eventos ou compras recentes</label>
         <textarea
           id="atividades"
@@ -100,6 +99,54 @@ function Cadastro() {
           value={formData.atividades}
           onChange={handleChange}
         />
+
+        <label className="cadastro_label">Quais jogos você acompanha a FURIA?</label>
+        <div className="jogos_options">
+          <label>
+            <input
+              className='options'
+              type="checkbox"
+              name="jogosFuria"
+              value="Valorant"
+              checked={formData.jogosFuria.includes("Valorant")}
+              onChange={handleChange}
+            />
+            Valorant
+          </label>
+          <label>
+            <input
+              className='options'
+              type="checkbox"
+              name="jogosFuria"
+              value="CS2"
+              checked={formData.jogosFuria.includes("CS2")}
+              onChange={handleChange}
+            />
+            CS2
+          </label>
+          <label>
+            <input
+              className='options'
+              type="checkbox"
+              name="jogosFuria"
+              value="LOL"
+              checked={formData.jogosFuria.includes("LOL")}
+              onChange={handleChange}
+            />
+            LOL
+          </label>
+          <label>
+            <input
+              className='options'
+              type="checkbox"
+              name="jogosFuria"
+              value="R6"
+              checked={formData.jogosFuria.includes("R6")}
+              onChange={handleChange}
+            />
+            R6
+          </label>
+        </div>
 
         <div className="cadastro_checkbox_container">
           <input

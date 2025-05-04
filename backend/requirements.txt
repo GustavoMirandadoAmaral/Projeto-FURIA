@@ -1,10 +1,25 @@
+# Web framework e servidor ASGI
 fastapi
 uvicorn
+
+# Requisições HTTP assíncronas
 httpx
+
+# Carregamento de variáveis de ambiente (.env)
 python-dotenv
+
+# ORM para banco de dados
 sqlalchemy
+
+# Validação de dados e configuração
 pydantic
 pydantic-settings
+
+# Upload e leitura de arquivos
 aiofiles
 python-multipart
+
+# Azure Form Recognizer
 azure-ai-formrecognizer
+
+openai

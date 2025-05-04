@@ -1,29 +1,21 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom'; // para navegar programaticamente
-import { useForm } from '../context/FormContext'; // importa o contexto corretamente
+import { useNavigate } from 'react-router-dom';
+import { useForm } from '../context/FormContext'; 
 import '../styles/StyleRedesSociais.css';
 import Header from './Header';
 import Instagram from "../assets/images/instagramLogo.png";
 import X from "../assets/images/xLogo.png";
 import Facebook from "../assets/images/facebookLogo.png";
-import Twitch from "../assets/images/twitchLogo.png";
-import Youtube from "../assets/images/youtubeLogo.png";
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom'; // para ler query params
-
-
 
 const VincularRedesSociais = () => {
-  const { atualizarFormulario } = useForm(); // ✔ pega do contexto
-  const navigate = useNavigate(); // ✔ para ir para a próxima etapa
+  const { atualizarFormulario } = useForm(); 
+  const navigate = useNavigate(); 
 
   const [redesVinculadas, setRedesVinculadas] = useState({
     instagram: false,
     x: false,
     facebook: false,
-    youtube: false,
-    twitch: false,
   });
 
   const handleVincular = async (rede) => {
@@ -34,12 +26,8 @@ const VincularRedesSociais = () => {
       novaJanela = window.open('https://twitter.com/i/flow/login', '_blank');
     } else if (rede === 'facebook') {
       novaJanela = window.open('https://www.facebook.com/login/', '_blank');
-    } else   if (rede === 'twitch') {
-      novaJanela = window.open('http://localhost:8000/twitch/login', '_blank');  // Redireciona diretamente
-    } else if (rede === 'youtube') {
-      novaJanela = window.open('https://www.youtube.com/account_advanced?hl=pt-br', '_blank');
     }
-  
+
     if (novaJanela) {
       setRedesVinculadas((prev) => ({ ...prev, [rede]: true }));
     }
@@ -48,20 +36,8 @@ const VincularRedesSociais = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     atualizarFormulario({ redesSociais: redesVinculadas });
-    navigate('/final'); // ✔ redireciona para a tela final
+    navigate('/final'); 
   };
-
-  const location = useLocation();
-
-useEffect(() => {
-  const params = new URLSearchParams(location.search);
-  if (params.get("twitch") === "success") {
-    setRedesVinculadas((prev) => ({ ...prev, twitch: true }));
-    // limpa a query string da URL
-    window.history.replaceState({}, document.title, location.pathname);
-  }
-}, [location]);
-
 
   return (
     <motion.div
@@ -100,24 +76,6 @@ useEffect(() => {
         >
           <span className="vincular_text">Vincular Facebook</span>
           <img src={Facebook} alt="Facebook" className="vincular_icon" />
-        </button>
-
-        <button
-          type="button"
-          className={`vincular_button ${redesVinculadas.youtube ? 'vinculada' : ''}`}
-          onClick={() => handleVincular('youtube')}
-        >
-          <span className="vincular_text">Vincular Youtube</span>
-          <img src={Youtube} alt="Youtube" className="vincular_icon" />
-        </button>
-        
-        <button
-          type="button"
-          className={`vincular_button ${redesVinculadas.twitch ? 'vinculada' : ''}`}
-          onClick={() => handleVincular('twitch')}
-        >
-          <span className="vincular_text">Vincular Twitch</span>
-          <img src={Twitch} alt="Twitch" className="vincular_icon" />
         </button>
 
         <button

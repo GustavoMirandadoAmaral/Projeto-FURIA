@@ -1,62 +1,81 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { useForm } from "../context/FormContext";
+import Header from "../components/Header";
 import '../styles/StyleTelaFinal.css';
-import Header from './Header';
 
-const TelaFinal = ({ linksRecomendados = [] }) => {
-  const [erro, setErro] = useState(false); // Estado para erro de carregamento
-  const carregando = linksRecomendados.length === 0;
+const TelaFinal = () => {
+  const { formulario } = useForm();
+  const jogosSelecionados = formulario.jogosFuria || [];
 
-  // Função para simular um erro (substitua por lógica real de erro)
-  const simularErro = () => {
-    setErro(true); // Simula um erro de carregamento
-  };
+  const [recomendacoes, setRecomendacoes] = useState([]);
+  const [carregando, setCarregando] = useState(true);
+
+  useEffect(() => {
+    const buscarRecomendacoes = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/recomendar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ jogos: jogosSelecionados }),
+        });
+
+        const data = await response.json();
+        console.log(data); 
+        
+        if (Array.isArray(data.recomendacoes)) {
+          setRecomendacoes(data.recomendacoes);
+        } else {
+          setRecomendacoes([]);  
+        }
+      } catch (error) {
+        console.error("Erro ao buscar recomendações:", error);
+        setRecomendacoes([]);  
+      } finally {
+        setCarregando(false);
+      }
+    };
+
+    if (jogosSelecionados.length > 0) {
+      buscarRecomendacoes();
+    } else {
+      setRecomendacoes("Você não selecionou nenhum jogo.");
+      setCarregando(false);
+    }
+  }, [jogosSelecionados]);
 
   return (
-    <motion.div
-      className="final_container"
-      initial={{ opacity: 0, x: 100 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -100 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div className="tela_final_container">
       <Header rotaAnterior="/redes" />
-      <h2 className="final_title">Cadastro Finalizado!</h2>
-      <p className="final_text">
-        Com base no seu perfil, estamos gerando recomendações de plataformas de e-sports para você.
-      </p>
+      <h2 className="titulo_final">Obrigado por se conectar com a FURIA!</h2>
 
-      {erro ? (
-        <p className="error_message">
-          Ocorreu um erro ao gerar suas recomendações. Tente novamente mais tarde.
-        </p>
+      {carregando ? (
+        <p className="texto_final">Carregando recomendações da IA...</p>
       ) : (
-        carregando ? (
-          <div className="loading_container" aria-live="polite">
-            <div className="spinner"></div>
-            <p className="loading_text">Gerando recomendações com base em seu perfil...</p>
-          </div>
-        ) : (
-          <ul className="link_list">
-            {linksRecomendados.map((link, index) => (
-              <li key={index} className="link_item">
-                <a href={link} target="_blank" rel="noopener noreferrer">
-                  {link}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )
+        <div className="texto_final">
+          {typeof recomendacoes === "string" ? (
+            <p className="mensagem_nenhum">{recomendacoes}</p>
+          ) : (
+            <ul className="recomendacoes_lista">
+              {recomendacoes.length > 0 ? (
+                recomendacoes.map((rec, i) => (
+                  <li key={i}>
+                    <strong>{rec.nome}</strong> – {rec.tipo} ({rec.jogo})
+                  </li>
+                ))
+              ) : (
+                <p className="mensagem_nenhum">Não há recomendações disponíveis.</p>
+              )}
+            </ul>
+          )}
+        </div>
       )}
 
-      <p className="success_message" style={{ marginTop: '20px' }}>
-        Obrigado por participar do projeto FURIA! Entraremos em contato em breve.
-      </p>
-
-      <button onClick={simularErro} className="simular_erro_button">
-        Simular Erro
+      <button className="final_button" onClick={() => window.location.href = '/'}>
+        Voltar para a página inicial
       </button>
-    </motion.div>
+    </div>
   );
 };
 

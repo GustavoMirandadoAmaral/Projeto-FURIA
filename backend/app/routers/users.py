@@ -8,7 +8,6 @@ router = APIRouter(prefix="/users", tags=["Users"])
 
 @router.post("/", response_model=User)
 def create_user(user: User, session: Session = Depends(get_session)):
-    # Verifica se o e-mail já existe
     existing_user = session.exec(select(User).where(User.email == user.email)).first()
     if existing_user:
         raise HTTPException(status_code=400, detail="E-mail já está em uso.")

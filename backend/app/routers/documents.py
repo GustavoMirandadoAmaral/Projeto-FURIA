@@ -12,19 +12,15 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 @router.post("/upload/")
 async def upload_documento(verso: UploadFile = File(...)):
     try:
-        # Salva o arquivo do verso com nome único
         ext = verso.filename.split('.')[-1]
         caminho_verso = os.path.join(UPLOAD_FOLDER, f"{uuid4()}.{ext}")
         with open(caminho_verso, "wb") as buffer:
             shutil.copyfileobj(verso.file, buffer)
 
-        # Valida com Azure
         resultado_verso = validar_documento_azure(caminho_verso)
 
-        # Apaga o arquivo temporário
         os.remove(caminho_verso)
 
-        # Retorna resultado direto
         return resultado_verso
 
     except Exception as e:
@@ -35,7 +31,7 @@ async def upload_documento(verso: UploadFile = File(...)):
 #mandar para apagar o banco de dados com os arquivos (só para testar o envio e validação por IA)
 @router.delete("/reset-docs")
 def reset_documentos():
-    pasta_uploads = "uploads"  # ou o nome da sua pasta
+    pasta_uploads = "uploads"  
     arquivos = os.listdir(pasta_uploads)
     for arquivo in arquivos:
         caminho = os.path.join(pasta_uploads, arquivo)

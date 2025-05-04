@@ -15,7 +15,7 @@ body {
 
 .header_cadastro {
   display: flex;
-  justify-content: space-between; /* máxima separação */
+  justify-content: space-between; 
   align-items: center;
 }
 
@@ -92,7 +92,7 @@ body {
 .imagem-pergunta {
   width: 300px;
   height: 200px;
-  object-fit: cover; /* <-- ALTERA AQUI */
+  object-fit: cover; 
   display: block;
   margin: 20px auto;
   border-radius: 10px;
@@ -111,8 +111,8 @@ body {
 
 .quiz-button {
   width: 100%;
-  max-width: 600px; /* Limita largura para monitores muito grandes */
-  min-width: 280px;  /* Garante boa largura em telas pequenas */
+  max-width: 600px; 
+  min-width: 280px;  
   min-height: 60px;
   padding: 16px 24px;
   font-size: 18px;
