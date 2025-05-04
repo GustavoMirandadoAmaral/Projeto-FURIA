@@ -34,8 +34,8 @@ const VincularRedesSociais = () => {
       novaJanela = window.open('https://twitter.com/i/flow/login', '_blank');
     } else if (rede === 'facebook') {
       novaJanela = window.open('https://www.facebook.com/login/', '_blank');
-    } else if (rede === 'twitch') {
-      novaJanela = window.open('http://localhost:8000/twitch/login', '_blank');
+    } else   if (rede === 'twitch') {
+      novaJanela = window.open('http://localhost:8000/twitch/login', '_blank');  // Redireciona diretamente
     } else if (rede === 'youtube') {
       novaJanela = window.open('https://www.youtube.com/account_advanced?hl=pt-br', '_blank');
     }

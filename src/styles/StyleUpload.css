@@ -188,14 +188,23 @@
     text-align: center;
 }
 
-/* Texto de erro */
 .upload_erro_text {
-    color: #ff0000;
-    text-align: center;
-    font-size: 14px;
+    color: red;
     font-weight: bold;
-    margin-top: 15px;
-}
+    text-align: center;
+  }
+  
+  .upload_sucesso_text {
+    color: green;
+    font-weight: bold;
+    animation: fadeIn 1s ease-in-out;
+    text-align: center;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 
 /* Adicionando responsividade para telas pequenas */
 @media (max-width: 600px) {

@@ -7,3 +7,4 @@ pydantic
 pydantic-settings
 aiofiles
 python-multipart
+azure-ai-formrecognizer

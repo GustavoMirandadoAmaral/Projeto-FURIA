@@ -1,5 +1,5 @@
 from fastapi import APIRouter, File, UploadFile
-from azure_validator import validar_documento_azure
+from app.azure_validator import validar_documento_azure
 import os
 import shutil
 from uuid import uuid4
@@ -29,3 +29,15 @@ async def upload_documento(verso: UploadFile = File(...)):
 
     except Exception as e:
         return {"erro": f"Erro ao processar o upload: {str(e)}"}
+    
+
+#curl -X DELETE http://localhost:8000/reset-docs
+#mandar para apagar o banco de dados com os arquivos (só para testar o envio e validação por IA)
+@router.delete("/reset-docs")
+def reset_documentos():
+    pasta_uploads = "uploads"  # ou o nome da sua pasta
+    arquivos = os.listdir(pasta_uploads)
+    for arquivo in arquivos:
+        caminho = os.path.join(pasta_uploads, arquivo)
+        os.remove(caminho)
+        return {"message": "Arquivos deletados com sucesso!"}

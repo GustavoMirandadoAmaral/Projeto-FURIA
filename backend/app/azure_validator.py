@@ -19,11 +19,6 @@ DOCUMENT_TYPES = {
 }
 
 def validar_documento_azure(caminho_arquivo: str):
-    """
-    Função que valida o verso de um documento utilizando o Azure Form Recognizer.
-    :param caminho_arquivo: Caminho do arquivo PDF ou imagem a ser analisado.
-    :return: Dicionário com os dados extraídos ou mensagem de erro.
-    """
     try:
         # Abre o arquivo PDF ou imagem
         with open(caminho_arquivo, "rb") as f:
