@@ -29,6 +29,12 @@ async def twitch_callback(request: Request):
     if not code:
         raise HTTPException(status_code=400, detail="Código de autorização não encontrado.")
 
+    # Debug: Verificar se os dados estão corretos
+    print("⚙️ DEBUG - CLIENT_ID:", CLIENT_ID)
+    print("⚙️ DEBUG - CLIENT_SECRET (primeiros 6 caracteres):", CLIENT_SECRET[:6])
+    print("⚙️ DEBUG - REDIRECT_URI:", REDIRECT_URI)
+    print("⚙️ DEBUG - Código de autorização recebido:", code)
+
     # Troca o code por um access_token
     token_url = "https://id.twitch.tv/oauth2/token"
     async with httpx.AsyncClient() as client:
@@ -44,6 +50,7 @@ async def twitch_callback(request: Request):
         )
 
     if token_response.status_code != 200:
+        print("❌ DEBUG - Erro na resposta do token:", token_response.text)
         raise HTTPException(status_code=token_response.status_code, detail="Falha ao obter token. " + token_response.text)
 
     token_data = token_response.json()
@@ -55,7 +62,6 @@ async def twitch_callback(request: Request):
         "Client-Id": CLIENT_ID,
     }
     async with httpx.AsyncClient() as client:
-        # Obter informações do usuário
         user_response = await client.get("https://api.twitch.tv/helix/users", headers=headers)
 
     if user_response.status_code != 200:
@@ -65,7 +71,7 @@ async def twitch_callback(request: Request):
     if not user_info:
         raise HTTPException(status_code=404, detail="Informações do usuário não encontradas.")
 
-    user_info = user_info[0]  # Assumindo que é sempre um único usuário, mas pode haver mais
+    user_info = user_info[0]
 
     # Obter os streamers seguidos pelo usuário
     async with httpx.AsyncClient() as client:
@@ -82,10 +88,8 @@ async def twitch_callback(request: Request):
     if not followed_streams:
         raise HTTPException(status_code=404, detail="Nenhum streamer seguido encontrado.")
 
-    # Debug: Verificar as informações de streams seguidos
-    print(f"Streamers seguidos: {followed_streams}")
+    print(f"📺 DEBUG - Streamers seguidos: {followed_streams}")
 
-    # Exibe ou retorna os streamers seguidos
     streamers_seguidos = [stream["to_name"] for stream in followed_streams]
 
     # Redireciona para o frontend com sucesso e os streamers seguidos
