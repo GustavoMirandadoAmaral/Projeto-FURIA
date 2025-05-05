@@ -1,0 +1,17 @@
+{
+    "name": "Projeto FURIA",
+    "short_name": "FURIA",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "description": "Quiz interativo da FURIA Esports.",
+    "icons": [
+      {
+        "src": "FuriaEsportsLogo.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ]
+  }
+  

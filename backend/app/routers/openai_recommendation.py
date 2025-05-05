@@ -7,11 +7,8 @@ load_dotenv()
 
 router = APIRouter()
 
-openai.api_type = "azure"
-openai.api_base = os.getenv("AZURE_OPENAI_ENDPOINT")
-openai.api_key = os.getenv("AZURE_OPENAI_KEY")
-openai.api_version = os.getenv("AZURE_OPENAI_VERSION")
-deployment_id = os.getenv("AZURE_OPENAI_DEPLOYMENT")
+# Configuração da API padrão da OpenAI
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 @router.post("/recomendar")
 async def recomendar(request: Request):
@@ -25,7 +22,7 @@ async def recomendar(request: Request):
 
     try:
         response = openai.ChatCompletion.create(
-            engine=deployment_id,
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "user", "content": prompt}
             ]
@@ -33,13 +30,16 @@ async def recomendar(request: Request):
 
         content = response["choices"][0]["message"]["content"]
 
-        # Retorna como lista simples separando por linhas
+        # Divide em linhas e retorna como lista
         recomendacoes = []
         for line in content.strip().split("\n"):
             if line.strip():
                 recomendacoes.append({"nome": line.strip(), "tipo": "Desconhecido", "jogo": "Desconhecido"})
 
+        # Limita as recomendações a 3
+        recomendacoes = recomendacoes[:3]
+
         return {"recomendacoes": recomendacoes}
 
     except Exception as e:
-        return {"recomendacoes": f"Erro na geração com Azure OpenAI: {str(e)}"}
+        return {"recomendacoes": f"Erro na geração com OpenAI: {str(e)}"}

@@ -8,11 +8,8 @@ class Settings(BaseSettings):
     azure_form_recognizer_endpoint: str
     azure_form_recognizer_key: str
 
-    # Azure OpenAI para recomendações
-    azure_openai_key: str
-    azure_openai_endpoint: str
-    azure_openai_deployment: str
-    azure_openai_version: str
+    # OpenAI oficial
+    openai_api_key: str
 
     class Config:
         env_file = ".env"
