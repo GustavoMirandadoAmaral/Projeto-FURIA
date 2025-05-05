@@ -9,6 +9,7 @@ httpx
 python-dotenv
 
 # ORM para banco de dados
+sqlmodel
 sqlalchemy
 
 # Validação de dados e configuração

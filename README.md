@@ -56,7 +56,7 @@ OPENAI_API_KEY=your_openai_api_key
 ``` bash
 cd .\backend\
 uvicorn app.main:app --reload
-Isso fará a API rodar localmente em http://localhost:8000.
+Isso fará a API rodar localmente em http://localhost:8000/docs#/.
 ```
 
 ### 6. Execute a Aplicação
