@@ -43,7 +43,7 @@ cd .\backend\
 pip install -r requirements.txt
 ```
 
-### 4. Configure as variáveis de ambiente criando um arquivo .env na raiz do projeto com as chaves necessárias (exemplo para Azure e OpenAI):
+### 4. Configure as variáveis de ambiente criando um arquivo .env na raiz do projeto (pasta backend) com as chaves necessárias (exemplo para Azure e OpenAI):
 
 ``` bash
 AZURE_FORM_RECOGNIZER_KEY=your_azure_key
@@ -52,7 +52,7 @@ OPENAI_API_KEY=your_openai_api_key
 
 ```
 
-### 5. Inicie o servidor backend(deve ser feito em um terminal diferente da aplicação fron-end - npm start mais para frente):
+### 5. Inicie o servidor backend (deve ser feito em um terminal diferente da aplicação fron-end - npm start mais para frente):
 ``` bash
 cd .\backend\
 uvicorn app.main:app --reload
